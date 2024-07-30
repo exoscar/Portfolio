@@ -5,8 +5,11 @@ export const LeftPaneContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 150px;
-  height: 100%;
+  height: 100vh;
   z-index: 2;
+  /* background-color: ${(props) => props.theme.palette.secondary.dark};
+   */
+  background: transparent;
   a {
     text-decoration: none;
     color: ${(props) => props.theme.palette.myCustomColor.text.main};

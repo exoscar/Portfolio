@@ -1,8 +1,6 @@
-import theme from "../../../Constants/theme";
 import { PButton } from "../../atoms/PButton";
 import PTypography from "../../atoms/PTypography";
 import { NavbarOptionsContainer } from "./style";
-import { Theme } from "@mui/material";
 
 export const NavbarOptions: React.FC<{}> = () => {
   const sections = [
@@ -14,10 +12,25 @@ export const NavbarOptions: React.FC<{}> = () => {
     { href: "#contact", label: "Contact" },
   ];
 
+  const handleScroll = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    href: string
+  ) => {
+    event.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <NavbarOptionsContainer>
-      {sections.map((section, index) => (
-        <a key={section.href} href={section.href}>
+      {sections.map((section) => (
+        <a
+          key={section.href}
+          href={section.href}
+          onClick={(event) => handleScroll(event, section.href)}
+        >
           <PTypography>{section.label}</PTypography>
         </a>
       ))}

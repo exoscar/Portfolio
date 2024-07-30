@@ -11,6 +11,12 @@ declare module "@mui/material/styles" {
         secondary: React.CSSProperties["color"];
         dark: React.CSSProperties["color"];
       };
+      greys: {
+        main: React.CSSProperties["color"];
+        dark: React.CSSProperties["color"];
+        light: React.CSSProperties["color"];
+        lighther?: React.CSSProperties["color"];
+      };
     };
   }
   interface PaletteOptions {
@@ -20,6 +26,12 @@ declare module "@mui/material/styles" {
         main?: React.CSSProperties["color"];
         secondary?: React.CSSProperties["color"];
         dark?: React.CSSProperties["color"];
+      };
+      greys?: {
+        main?: React.CSSProperties["color"];
+        dark?: React.CSSProperties["color"];
+        light?: React.CSSProperties["color"];
+        lighther?: React.CSSProperties["color"];
       };
     };
   }
@@ -39,6 +51,12 @@ const themeOptions: ThemeOptions = {
         main: "#FFFFFF",
         secondary: "#51C6B7",
         dark: "#DDDDDD",
+      },
+      greys: {
+        main: "#A8B2D1",
+        dark: "#233554",
+        light: "#8892B0",
+        lighther: "#CCD6F6",
       },
     },
   },

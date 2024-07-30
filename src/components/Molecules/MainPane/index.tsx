@@ -1,14 +1,21 @@
 import PTypography from "../../atoms/PTypography";
 import { MainPaneContainer } from "./style";
+import { WorkProfile } from "../WorkProfile";
+import { EduProfile } from "../EduProfile";
+import { SkillProfile } from "../SkillProfile";
 
-export const MainPane = () => {
+interface MainPaneProps {
+  ref?: React.RefObject<HTMLDivElement>;
+}
+
+export const MainPane: React.FC<MainPaneProps> = ({ ref }) => {
   return (
     <MainPaneContainer>
-      <div className="intro">
+      <div id="about" className="intro" ref={ref ?? undefined}>
         <PTypography className="greet">Hi, my name is</PTypography>
-        <PTypography className="name">Latchireddi Sai Charan</PTypography>
+        <PTypography className="name">Sai Charan Latchireddi </PTypography>
         <PTypography className="slogan">
-          Transforming ideas into dynamic web experiences.
+          My Superpower Is Creating Interactive Websites
         </PTypography>
         <PTypography className="description">
           a dedicated software engineer specializing in creating high-quality
@@ -20,6 +27,15 @@ export const MainPane = () => {
           committed to building accessible and impactful products that enhance
           user engagement and satisfaction.
         </PTypography>
+      </div>
+      <div id="experience" className="work-profile">
+        <WorkProfile />
+      </div>
+      <div id="education" className="edu-profile">
+        <EduProfile />
+      </div>
+      <div id="skills" className="skill-profile">
+        <SkillProfile />
       </div>
     </MainPaneContainer>
   );

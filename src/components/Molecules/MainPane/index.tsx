@@ -2,7 +2,7 @@ import PTypography from "../../atoms/PTypography";
 import { MainPaneContainer } from "./style";
 import { WorkProfile } from "../WorkProfile";
 import { useEffect } from "react";
-import { Fade } from "@mui/material";
+import { Fade, useMediaQuery } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
@@ -47,25 +47,30 @@ export const MainPane: React.FC<MainPaneProps> = ({ ref }) => {
     scrambleText(element, finalText);
   }, []);
 
+  const isMobile = useMediaQuery("(max-width: 770px)");
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("slide-in");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    if (!isMobile) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("slide-in");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-    const elements = document.querySelectorAll(".animate-on-scroll");
-    elements.forEach((el) => observer.observe(el));
+      const elements = document.querySelectorAll(".animate-on-scroll");
+      elements.forEach((el) => observer.observe(el));
 
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-    };
+      return () => {
+        elements.forEach((el) => observer.unobserve(el));
+      };
+    }
+    return () => {};
   }, []);
 
   return (

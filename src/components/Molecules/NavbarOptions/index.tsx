@@ -41,6 +41,7 @@ export const NavbarOptions = () => {
     sections.forEach((section) => {
       const element = document.querySelector(section.href);
       if (element) {
+        // @ts-ignore
         sectionRefs.current[section.href] = element;
         observer.observe(element);
       }

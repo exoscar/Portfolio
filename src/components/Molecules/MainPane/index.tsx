@@ -25,7 +25,7 @@ export const MainPane: React.FC<MainPaneProps> = ({ ref }) => {
     interval = setInterval(() => {
       element.innerText = finalText
         .split("")
-        .map((letter, index) => {
+        .map((_letter, index) => {
           if (index < iteration) {
             return finalText[index];
           }

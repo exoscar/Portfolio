@@ -37,7 +37,6 @@ declare module "@mui/material/styles" {
   }
 }
 
-// Define your theme object
 const themeOptions: ThemeOptions = {
   palette: {
     primary: { main: "#51C6B7" },
@@ -62,10 +61,8 @@ const themeOptions: ThemeOptions = {
   },
 };
 
-// Create the theme
 const theme = createTheme(themeOptions);
 
-// To get proper type checks
 declare module "@emotion/react" {
   export interface Theme extends MUITheme {}
 }

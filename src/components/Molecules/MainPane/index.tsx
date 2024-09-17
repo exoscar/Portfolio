@@ -47,7 +47,7 @@ export const MainPane: React.FC<MainPaneProps> = ({ ref }) => {
     scrambleText(element, finalText);
   }, []);
 
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 770px)");
 
   useEffect(() => {
     if (!isMobile) {

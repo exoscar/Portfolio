@@ -65,13 +65,13 @@ export const ProjectProfile = () => {
       time: "Apr 2023",
       navigateTo: "https://github.com/exoscar/alumiportal",
     },
-    {
-      projectTitle: "URL Shortner",
-      description: "A URL shortening service to shorten long URLs.",
-      skills: ["ReactJs", "NodeJS", "MongoDB", "TypeScript"],
-      time: "Sep 2024",
-      navigateTo: "https://github.com/exoscar/URL_shortener_BE",
-    },
+    // {
+    //   projectTitle: "URL Shortner",
+    //   description: "A URL shortening service to shorten long URLs.",
+    //   skills: ["ReactJs", "NodeJS", "MongoDB", "TypeScript"],
+    //   time: "Sep 2024",
+    //   navigateTo: "https://github.com/exoscar/URL_shortener_BE",
+    // },
     {
       projectTitle: "Portfolio ",
       description:

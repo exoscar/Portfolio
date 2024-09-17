@@ -48,6 +48,22 @@ export const WorkProfileContainer = styled.div`
   .duration {
     color: ${(props) => props.theme.palette.myCustomColor.greys.light};
   }
+
+  .mobile-company-title {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 760px) {
+    .title {
+      font-size: 1.5rem;
+      padding-bottom: 1rem;
+    }
+    min-height: 0;
+    .company-name {
+      color: ${(props) => props.theme.palette.myCustomColor.text.main};
+    }
+  }
 `;
 
 export const ListOptionContainer = styled.div`

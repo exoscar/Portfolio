@@ -6,7 +6,9 @@ import {
   ListOptionContainer,
   JobDescriptionContainer,
 } from "./style";
-import { duration } from "@mui/material";
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useMediaQuery } from "@mui/material";
 
 interface ListOptionProps {
   title: string;
@@ -85,36 +87,89 @@ export const WorkProfile = () => {
     },
   };
 
+  const [expanded, setExpanded] = useState<string | false>(
+    Object.keys(companyDetails)[0]
+  );
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
+
+  const isMobile = useMediaQuery("(max-width:760px)");
+
   return (
     <WorkProfileContainer>
       <PTypography className="title">My Professional Journey</PTypography>
-      <div className="work-content">
-        <div className="job-list">
-          {companyNames.map((companyName) => (
-            <ListOption
-              key={companyName}
-              title={companyName}
-              selected={companyName === selectedCompany}
-              onClick={() => handleOptionClick(companyName)}
+      {!isMobile ? (
+        <div className="work-content">
+          <div className="job-list">
+            {companyNames.map((companyName) => (
+              <ListOption
+                key={companyName}
+                title={companyName}
+                selected={companyName === selectedCompany}
+                onClick={() => handleOptionClick(companyName)}
+              />
+            ))}
+          </div>
+          <div className="job-info">
+            <div className="text-info">
+              <PTypography className="company-name">
+                {companyDetails[selectedCompany].role}{" "}
+                <span>@{selectedCompany}</span>
+              </PTypography>
+              <PTypography className="duration">
+                {companyDetails[selectedCompany].duration}
+              </PTypography>
+            </div>
+
+            <JobDescriptionBullets
+              points={companyDetails[selectedCompany].points}
             />
+          </div>
+        </div>
+      ) : (
+        <div className="mobile-work-content">
+          {Object.entries(companyDetails).map(([companyName, company]) => (
+            <Accordion
+              sx={{
+                backgroundColor: "rgba(20, 65, 121, 0.5)",
+              }}
+              key={companyName}
+              expanded={expanded === companyName}
+              onChange={handleChange(companyName)}
+            >
+              <AccordionSummary
+                expandIcon={
+                  <KeyboardArrowDownIcon
+                    sx={{
+                      color: "rgba(255, 255, 255, 0.5)",
+                    }}
+                  />
+                }
+              >
+                <div className="mobile-company-title">
+                  <PTypography className="company-name">
+                    {company.role}
+                  </PTypography>
+                  <span>@{companyName}</span>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className="job-info">
+                  <div className="text-info">
+                    <PTypography className="duration">
+                      {company.duration}
+                    </PTypography>
+                  </div>
+                  <JobDescriptionBullets points={company.points} />
+                </div>
+              </AccordionDetails>
+            </Accordion>
           ))}
         </div>
-        <div className="job-info">
-          <div className="text-info">
-            <PTypography className="company-name">
-              {companyDetails[selectedCompany].role}{" "}
-              <span>@{selectedCompany}</span>
-            </PTypography>
-            <PTypography className="duration">
-              {companyDetails[selectedCompany].duration}
-            </PTypography>
-          </div>
-
-          <JobDescriptionBullets
-            points={companyDetails[selectedCompany].points}
-          />
-        </div>
-      </div>
+      )}
     </WorkProfileContainer>
   );
 };

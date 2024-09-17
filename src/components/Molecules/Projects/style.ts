@@ -17,9 +17,17 @@ export const ProjectWrapepr = styled.div`
     gap: 1rem;
     flex-wrap: wrap;
   }
+  @media (max-width: 1024px) {
+    width: calc(100% - 2rem);
+  }
+
+  @media (max-width: 768px) {
+    width: calc(100% - 2rem);
+  }
 `;
 
 export const ProjectCard = styled.div`
+  cursor: pointer;
   backdrop-filter: blur(100);
   background-color: rgba(15, 23, 42, 0.5);
   width: 30%;
@@ -83,5 +91,12 @@ export const ProjectCard = styled.div`
     img {
       transform: scale(1.05);
     }
+  }
+  @media (max-width: 1024px) {
+    width: 40%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;

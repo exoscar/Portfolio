@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { PButton } from "../../atoms/PButton";
 import PTypography from "../../atoms/PTypography";
 import { NavbarOptionsContainer } from "./style";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useMediaQuery } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 export const NavbarOptions = () => {
   const [activeSection, setActiveSection] = useState<string>("");
@@ -52,7 +55,7 @@ export const NavbarOptions = () => {
       });
     };
   }, [sections]);
-
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const handleScroll = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     href: string
@@ -61,31 +64,112 @@ export const NavbarOptions = () => {
     setActiveSection(href);
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "center" });
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: !isMobile ? "center" : "start",
+      });
     }
   };
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <NavbarOptionsContainer>
-      {sections.map((section) => (
-        <a
-          key={section.href}
-          href={section.href}
-          onClick={(event) => handleScroll(event, section.href)}
-        >
-          <PTypography
-            fontSize={16}
-            style={{
-              color: activeSection === section.href ? "#51C6B7" : "#fff",
-            }}
+      {!isMobile ? (
+        <>
+          {sections.map((section) => (
+            <a
+              key={section.href}
+              href={section.href}
+              onClick={(event) => handleScroll(event, section.href)}
+            >
+              <PTypography
+                fontSize={16}
+                style={{
+                  color: activeSection === section.href ? "#51C6B7" : "#fff",
+                }}
+              >
+                {section.label}
+              </PTypography>
+            </a>
+          ))}
+          <PButton
+            variant="contained"
+            onClick={() =>
+              window.open(
+                "https://drive.google.com/file/d/1ctnQl5stb_h8BEYbKKl4CufGPmnnQ5jj/view?usp=sharing",
+                "_blank"
+              )
+            }
           >
-            {section.label}
-          </PTypography>
-        </a>
-      ))}
-      <PButton variant="contained">
-        <PTypography>Resume</PTypography>
-      </PButton>
+            <PTypography>Resume</PTypography>
+          </PButton>
+        </>
+      ) : (
+        <>
+          <PButton
+            variant="contained"
+            onClick={() =>
+              window.open(
+                "https://drive.google.com/file/d/1ctnQl5stb_h8BEYbKKl4CufGPmnnQ5jj/view?usp=sharing",
+                "_blank"
+              )
+            }
+          >
+            <PTypography
+              sx={{
+                padding: "0rem",
+                lineHeight: "1",
+              }}
+            >
+              Resume
+            </PTypography>
+          </PButton>
+          <MenuIcon
+            sx={{
+              color: "#fff",
+            }}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          />
+          {isMenuOpen && (
+            <div className="menu-listt">
+              <Close
+                sx={{
+                  color: "#fff",
+                  position: "absolute",
+                  top: 30,
+                  right: 30,
+                  cursor: "pointer",
+                }}
+                onClick={() => setIsMenuOpen(false)}
+              />
+              {sections.map((section) => (
+                <>
+                  <a
+                    key={section.href}
+                    href={section.href}
+                    onClick={(event) => {
+                      handleScroll(event, section.href);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    <PTypography
+                      fontSize={16}
+                      style={{
+                        color:
+                          activeSection === section.href ? "#51C6B7" : "#fff",
+                      }}
+                    >
+                      {section.label}
+                    </PTypography>
+                  </a>
+                  <div className="divi"></div>
+                </>
+              ))}
+            </div>
+          )}
+        </>
+      )}
     </NavbarOptionsContainer>
   );
 };

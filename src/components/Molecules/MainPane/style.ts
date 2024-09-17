@@ -1,12 +1,27 @@
 import styled from "@emotion/styled";
 
 export const MainPaneContainer = styled.div`
-  width: 101%;
+  width: 100%;
   z-index: 2;
   /* background-color: ${(props) => props.theme.palette.secondary.dark}; */
   background: transparent;
   background-image: url("../assets/portfolio.jpg");
   background-size: cover;
+
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .slide-in {
+    animation: slideInFromBottom 0.5s ease-out forwards;
+  }
 
   .intro {
     height: 100vh;
@@ -26,6 +41,7 @@ export const MainPaneContainer = styled.div`
       color: ${(props) => props.theme.palette.myCustomColor.text.main};
       font-family: "Inter", sans-serif;
       font-size: 4rem;
+      line-height: 1;
       font-weight: 700;
     }
     .slogan {
@@ -108,10 +124,80 @@ export const MainPaneContainer = styled.div`
     flex-wrap: wrap;
   }
 
+  @media (max-width: 1024px) {
+    .intro {
+      height: 50vh;
+      .name {
+        font-size: 4rem;
+      }
+      .slogan {
+        font-size: 2.5rem;
+      }
+      .description {
+        width: 80%;
+      }
+    }
+    .edu-skills {
+      flex-direction: column;
+    }
+    .edu-profile {
+      width: calc(100% - 5rem);
+    }
+    .skill-profile {
+      width: calc(100% - 5rem);
+    }
+  }
+
   @media (max-width: 768px) {
+    .intro {
+      height: 50vh;
+      gap: 0.5rem;
+      .name {
+        font-size: 3rem;
+      }
+      .slogan {
+        font-size: 1.75rem;
+      }
+      .description {
+        width: 80%;
+      }
+    }
     .edu-profile,
     .skill-profile {
-      width: 100%;
+      width: calc(100% - 5rem);
+    }
+
+    .project-profile {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .intro {
+      height: 100vh;
+      gap: 0.5rem;
+      padding-left: 2.5rem;
+      .name {
+        font-size: 2.5rem;
+      }
+      .slogan {
+        font-size: 1.5rem;
+      }
+      .description {
+        width: 80%;
+      }
+    }
+
+    .work-profile {
+      padding: 1rem;
+    }
+
+    .edu-skills {
+      padding: 1rem;
+    }
+    .edu-profile,
+    .skill-profile {
+      width: calc(100%-2rem);
     }
   }
 `;

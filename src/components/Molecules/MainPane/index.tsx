@@ -1,9 +1,7 @@
 import PTypography from "../../atoms/PTypography";
 import { MainPaneContainer } from "./style";
 import { WorkProfile } from "../WorkProfile";
-import { EduProfile } from "../EduProfile";
-import { SkillProfile } from "../SkillProfile";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Fade } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -49,6 +47,27 @@ export const MainPane: React.FC<MainPaneProps> = ({ ref }) => {
     scrambleText(element, finalText);
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("slide-in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll(".animate-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <MainPaneContainer>
       <Fade in={true} timeout={3000}>
@@ -91,11 +110,11 @@ export const MainPane: React.FC<MainPaneProps> = ({ ref }) => {
           </div>
         </div>
       </Fade>
-      <div id="experience" className="work-profile">
+      <div id="experience" className="work-profile animate-on-scroll">
         <WorkProfile />
       </div>
-      <div className="edu-skills">
-        <div id="education" className="edu-profile">
+      <div className="edu-skills animate-on-scroll">
+        <div id="education" className="edu-profile ">
           {/* <EduProfile /> */}
           <AcademicQualification2 />
         </div>
@@ -104,7 +123,7 @@ export const MainPane: React.FC<MainPaneProps> = ({ ref }) => {
         </div>
       </div>
 
-      <div id="projects" className="project-profile">
+      <div id="projects" className="project-profile animate-on-scroll">
         <ProjectProfile />
       </div>
     </MainPaneContainer>

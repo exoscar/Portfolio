@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
 
 export const WorkProfileContainer = styled.div`
-  height: 40vh;
+  min-height: 40vh;
+
+  padding: 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(100);
+  background-color: rgba(15, 23, 42, 0.5);
   .title {
     font-size: 2rem;
     color: ${(props) => props.theme.palette.myCustomColor.text.secondary};

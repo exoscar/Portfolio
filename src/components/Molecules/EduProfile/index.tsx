@@ -9,7 +9,7 @@ import TimelineDot from "@mui/lab/TimelineDot";
 
 interface TimeLineItemContentProps {
   educationTitle: string;
-  duration: string;
+
   institution: string;
   score: string;
   indi: number;
@@ -18,7 +18,7 @@ interface TimeLineItemContentProps {
 
 const TimeLineItemContent: React.FC<TimeLineItemContentProps> = ({
   educationTitle,
-  duration,
+
   institution,
   score,
   indi,
@@ -80,7 +80,6 @@ export const EduProfile = () => {
                   <TimeLineItemContent
                     educationTitle={edu.educationTitle}
                     specialisation={edu?.specialisation}
-                    duration={edu.duration}
                     institution={edu.institution}
                     score={edu.score}
                     indi={index + 1}

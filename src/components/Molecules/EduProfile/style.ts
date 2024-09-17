@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { TimelineContent } from "@mui/lab";
 
 export const EduProfileWrapper = styled.div`
   .title {
